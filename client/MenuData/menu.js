@@ -1,7 +1,7 @@
 export const menuData = [
   {
-    title: "Sign Up",
-    link: "/signup",
+    title: "About",
+    link: "/about",
   },
-  { title: "Sign In", link: "/signin" },
+  { title: "Github", link: "/search-github-profile" },
 ];

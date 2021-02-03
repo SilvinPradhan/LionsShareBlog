@@ -3,7 +3,6 @@ import {
   Collapse,
   Navbar,
   NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
@@ -11,11 +10,14 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  NavbarBrand,
 } from 'reactstrap';
+import styles from '../Component.module.css'
+import { IoLogIn, IoPersonAddSharp } from 'react-icons/io5'
 import Link from "next/link";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import "../../MenuData/menu"
-import { menuData } from '../../MenuData/menu';
+// import { menuData } from '../../MenuData/menu';
+import { Tooltip } from '@material-ui/core';
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,12 +26,13 @@ const Header = (props) => {
 
   return (
     <div>
-      <Navbar color="light" light expand="md">
-        <Link href="/"><NavbarBrand>LionsShare</NavbarBrand></Link>
-        <NavbarToggler onClick={toggle} />
+      <Navbar style={{ backgroundColor: "#233c91", color: "#ffffff" }} expand="md">
+        <NavbarBrand><img width="35px" height="35px" src="https://www.flaticon.com/svg/vstatic/svg/616/616412.svg?token=exp=1612391794~hmac=275f9a641552b73feb8ee7f4557138df" /></NavbarBrand>
+        <Link href="/"><NavLink className={styles.App_Name}>LionsShare</NavLink></Link>
+        <NavbarToggler className={styles.navbar_toggler} onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <Nav className="ml-auto" navbar style={{ padding: "5px" }}>
-            {
+          <Nav className="ml-auto" navbar>
+            {/* {
               menuData.map((item, index) => (
                 (
                   <Link href={item.link}>
@@ -41,38 +44,23 @@ const Header = (props) => {
                   </Link>
                 )
               ))
-            }
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
+            } */}
+            <UncontrolledDropdown size="lg" nav inNavbar>
+              <DropdownToggle className={styles.Toggle_Start} style={{ color: "#ffffff" }} nav caret>
                 Get Started
               </DropdownToggle>
               <DropdownMenu right>
-                {
-                  menuData.map((item, index) => (
-                    (
-                      <DropdownItem>
-                        <Link href={item.link}>
-                          <NavLink className="font-weight-bold" key={index}>
-                            {
-                              item.title
-                            }
-                          </NavLink>
-                        </Link>
-                      </DropdownItem>
-                    )
-                  ))
-                }
-                {/* <DropdownItem>
-                  Sign In
+                <DropdownItem>
+                  <Link href="/signin"><span>Sign In</span></Link> &nbsp;<IoLogIn />
                 </DropdownItem>
                 <DropdownItem divider />
                 <DropdownItem>
-                  Sign Up
-                </DropdownItem> */}
+                  <Link href="/signup"><span>Sign Up</span></Link> &nbsp;<IoPersonAddSharp />
+                </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
-            <NavItem style={{ marginTop: "6px" }}>
-              <AccountCircleIcon />
+            <NavItem style={{ marginTop: "6px", marginLeft: "8px" }}>
+              <Tooltip title="Silvin Pradhan" arrow interactive><AccountCircleIcon /></Tooltip>
             </NavItem>
           </Nav>
         </Collapse>
