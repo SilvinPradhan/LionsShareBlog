@@ -27,7 +27,7 @@ const Header = (props) => {
   return (
     <div>
       <Navbar style={{ backgroundColor: "#233c91", color: "#ffffff" }} expand="md">
-        <NavbarBrand><img width="35px" height="35px" src="https://www.flaticon.com/svg/vstatic/svg/616/616412.svg?token=exp=1612391794~hmac=275f9a641552b73feb8ee7f4557138df" /></NavbarBrand>
+        <NavbarBrand><img width={35} height={35} src="https://img.icons8.com/emoji/2x/lion-emoji.png" alt="selu mascot" /></NavbarBrand>
         <Link href="/"><NavLink className={styles.App_Name}>LionsShare</NavLink></Link>
         <NavbarToggler className={styles.navbar_toggler} onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
