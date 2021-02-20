@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
       <Header />
       {/* render the contents in between */}
       {children}
-      <p> Footer </p>
+      {/* <p> Footer </p> */}
     </React.Fragment>
   );
 };
