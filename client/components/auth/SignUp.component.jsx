@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { signup } from '../../actions/auth'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const SignUpComponent = () => {
     const [values, setValues] = useState({
         name: 'SLU Lions',
@@ -23,16 +26,19 @@ const SignUpComponent = () => {
         await signup(user).then(data => {
             if (data.error) {
                 setValues({ ...values, error: data.error, loading: false })
+                toast.error(`${data.error}`)
             } else {
                 setValues({ ...values, name: '', email: '', password: '', error: '', loading: false, message: data.message, showForm: false, })
+                toast.success(`You are successfully registered!`)
             }
         })
+
     }
     const handleChange = name => (e) => {
         setValues({ ...values, error: false, [name]: e.target.value })
     };
 
-    const showLoading = () => (loading ? <div className="alert alert-info"> Loading ...</div> : "");
+    const showLoading = () => (loading ? <div className="alert alert-info"><span> Loading ...</span></div> : "");
     const showError = () => (error ? <div className="alert alert-danger"> {error}</div> : "");
 
     const showMessage = () => (message ? <div className="alert alert-info"> {message}</div> : "");
@@ -40,6 +46,7 @@ const SignUpComponent = () => {
     const signupForm = () => {
         return (
             <form onSubmit={handleSubmit}>
+                <ToastContainer />
                 <div className="form-group">
                     <input value={name} onChange={handleChange('name')} type="text" className="form-control"></input>
                 </div>
