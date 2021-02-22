@@ -3,6 +3,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/": "pages/index.js",
-  "/signup": "pages/signup.js",
-  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js"
+  "/signup": "pages/signup.js"
 }

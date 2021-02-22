@@ -46,19 +46,23 @@ const SignUpComponent = () => {
     const signupForm = () => {
         return (
             <form onSubmit={handleSubmit}>
-                <ToastContainer />
+                <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                 <div className="form-group">
+                    <label htmlFor="name">Name</label>
                     <input value={name} onChange={handleChange('name')} type="text" className="form-control"></input>
                 </div>
                 <div className="form-group">
+                    <label htmlFor="email">Email Address</label>
                     <input value={email} onChange={handleChange('email')} type="email" className="form-control" placeholder="Type your email"></input>
                 </div>
                 <div className="form-group">
+                    <label htmlFor="password">Password</label>
                     <input value={password} onChange={handleChange('password')} type="password" className="form-control" placeholder="Type your password"></input>
                 </div>
                 {/* Submit */}
-                <div className="form-group">
-                    <button className="btn btn-primary">Sign Up</button>
+                <div className="form-group col text-center">
+                    {loading ? (<img src="/spinner.png" width="100px" height="100px" alt="Loading..." />) : (<button className="btn btn-primary">Register</button>)}
+
                 </div>
             </form>
         )
