@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { signup } from '../../actions/auth'
+import { signin, signup } from '../../actions/auth'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -29,7 +29,7 @@ const SignUpComponent = () => {
                 toast.error(`${data.error}`)
             } else {
                 setValues({ ...values, name: '', email: '', password: '', error: '', loading: false, message: data.message, showForm: false, })
-                toast.success(`You are successfully registered!`)
+                toast.success(`You have Successfully registered!`)
             }
         })
 
@@ -40,7 +40,6 @@ const SignUpComponent = () => {
 
     const showLoading = () => (loading ? <div className="alert alert-info"><span> Loading ...</span></div> : "");
     const showError = () => (error ? <div className="alert alert-danger"> {error}</div> : "");
-
     const showMessage = () => (message ? <div className="alert alert-info"> {message}</div> : "");
 
     const signupForm = () => {
@@ -62,7 +61,6 @@ const SignUpComponent = () => {
                 {/* Submit */}
                 <div className="form-group col text-center">
                     {loading ? (<img src="/spinner.png" width="100px" height="100px" alt="Loading..." />) : (<button className="btn btn-primary">Register</button>)}
-
                 </div>
             </form>
         )
