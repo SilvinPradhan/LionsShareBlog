@@ -12,12 +12,14 @@ import {
   DropdownItem,
   NavbarBrand,
 } from 'reactstrap';
+import { signout, isAuthenticated } from '../../actions/auth'
 import styles from '../Component.module.css'
 import { IoLogIn, IoPersonAddSharp } from 'react-icons/io5'
 import Link from "next/link";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // import { menuData } from '../../MenuData/menu';
 import { Tooltip } from '@material-ui/core';
+import Router from 'next/router';
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,6 +61,16 @@ const Header = (props) => {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
+            {
+              isAuthenticated() && (
+                <NavItem>
+                  <Link href="/signin">
+                    <NavLink onClick={() => signout(() => Router.replace(`/signin`))}>Sign Out</NavLink>
+                  </Link>
+                </NavItem>
+              )
+
+            }
             <NavItem style={{ marginTop: "6px", marginLeft: "8px" }}>
               <Tooltip title="Silvin Pradhan" arrow interactive><AccountCircleIcon /></Tooltip>
             </NavItem>

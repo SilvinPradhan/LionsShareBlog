@@ -32,6 +32,23 @@ export const signin = (user) => {
 		.catch((err) => console.log(err));
 };
 
+// signout
+export const signout = (next) => {
+	removeCookie('token');
+	removeLocalStorage('user');
+	next();
+
+	return fetch(`${API}/signout`, {
+		method: 'GET',
+	})
+		.then((res) => {
+			console.log('signout successful.');
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+};
+
 // Set Cookie
 export const setCookie = (key, value) => {
 	// check if the process is running in the client side
@@ -53,7 +70,7 @@ export const removeCookie = (key) => {
 // Get Cookie
 export const getCookie = (key) => {
 	if (process.browser) {
-		cookie.get(key);
+		return cookie.get(key);
 	}
 };
 

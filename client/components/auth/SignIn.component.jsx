@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { signin } from '../../actions/auth'
+import { signin, authenticate } from '../../actions/auth'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Router from 'next/router';
@@ -30,8 +30,11 @@ const SignInComponent = () => {
             } else {
                 // Save user token to cookie
                 // save user info to localStorage
-                Router.push('/')
-                toast.success("You are logged in!");
+                // authenticate user
+                authenticate(data, () => {
+                    Router.push('/')
+                })
+                toast.success("You are logged in!", { pauseOnFocusLoss: false });
             }
         })
 
@@ -47,7 +50,7 @@ const SignInComponent = () => {
     const signinForm = () => {
         return (
             <form onSubmit={handleSubmit}>
-                <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+                <ToastContainer position="top-right" autoClose={6000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                 <div className="form-group">
                     <label htmlFor="email">Email Address</label>
                     <input value={email} onChange={handleChange('email')} type="email" className="form-control" placeholder="Type your email"></input>
