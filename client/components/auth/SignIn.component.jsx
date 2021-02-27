@@ -3,6 +3,8 @@ import { signin, authenticate, isAuthenticated } from '../../actions/auth'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Router from 'next/router';
+import CustomButton from '../custom-button/custom-button.component';
+import styles from '../Component.module.css'
 
 const SignInComponent = () => {
     const [values, setValues] = useState({
@@ -39,7 +41,7 @@ const SignInComponent = () => {
                 authenticate(data, () => {
                     Router.push(`/`)
                 })
-                toast.info(`You have signed in as ${data.name}`)
+                toast.success(`You have signed in as ${user.name}`)
             }
         })
 
@@ -69,7 +71,7 @@ const SignInComponent = () => {
                 </div>
                 {/* Submit */}
                 <div className="form-group col text-center">
-                    {loading ? (<img src="/spinner.png" width="100px" height="100px" alt="Loading..." />) : (<button className="btn btn-primary" disabled={!isEnabled}>Login</button>)}
+                    {loading ? (<img src="/spinner.png" width="100px" height="100px" alt="Loading..." />) : (<CustomButton className={styles.custom_button} disabled={!isEnabled}>Login</CustomButton>)}
                 </div>
             </form>
         )

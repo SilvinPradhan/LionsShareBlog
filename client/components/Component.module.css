@@ -36,7 +36,7 @@
 	line-height: 50px;
 	padding: 0 35px 0 35px;
 	font-size: 15px;
-	background-color: #329962;
+	background-color: #334aa6;
 	color: white;
 	text-transform: uppercase;
 	font-weight: bolder;
@@ -47,6 +47,6 @@
 
 .custom_button:hover {
 	background-color: white;
-	color: #329962;
-	border: 1px solid #329962;
+	color: #334aa6;
+	border: 1px solid #334aa6;
 }
