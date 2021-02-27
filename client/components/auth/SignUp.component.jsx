@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import { signin, signup } from '../../actions/auth'
+import { useState, useEffect } from 'react'
+import { signup, isAuthenticated } from '../../actions/auth'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Router from 'next/router'
 
 const SignUpComponent = () => {
     const [values, setValues] = useState({
@@ -16,6 +17,11 @@ const SignUpComponent = () => {
 
     // Destructure te values from the state.
     const { name, email, password, error, loading, message, showForm } = values
+
+    useEffect(() => {
+        // Check if there is a token and user data in localstorage as well as cookie, redirect the logged in user to homepage
+        isAuthenticated() && Router.push(`/`) // For safety purposes so that '/signin' would not redirect to sign in page although the user already signed
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();

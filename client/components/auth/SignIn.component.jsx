@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { signin, authenticate } from '../../actions/auth'
+import { useState, useEffect } from 'react'
+import { signin, authenticate, isAuthenticated } from '../../actions/auth'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Router from 'next/router';
@@ -15,7 +15,12 @@ const SignInComponent = () => {
     })
 
     // Destructure te values from the state.
-    const { email, password, error, loading, message, showForm } = values
+    const { email, password, error, loading, message, showForm } = values;
+
+    useEffect(() => {
+        // Check if there is a token and user data in localstorage as well as cookie, redirect the logged in user to homepage
+        isAuthenticated() && Router.push('/') // For safety purposes so that '/signin' would not redirect to sign in page although the user already signed
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -32,9 +37,9 @@ const SignInComponent = () => {
                 // save user info to localStorage
                 // authenticate user
                 authenticate(data, () => {
-                    Router.push('/')
+                    Router.push(`/`)
                 })
-                toast.success("You are logged in!", { pauseOnFocusLoss: false });
+                toast.info(`You have signed in as ${data.name}`)
             }
         })
 
@@ -50,7 +55,7 @@ const SignInComponent = () => {
     const signinForm = () => {
         return (
             <form onSubmit={handleSubmit}>
-                <ToastContainer position="top-right" autoClose={6000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
+                <ToastContainer position="top-right" autoClose={8000} hideProgressBar={false} newestOnTop closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
                 <div className="form-group">
                     <label htmlFor="email">Email Address</label>
                     <input value={email} onChange={handleChange('email')} type="email" className="form-control" placeholder="Type your email"></input>
@@ -71,7 +76,6 @@ const SignInComponent = () => {
             {showError()}
             {showLoading()}
             {showMessage()}
-
             { showForm && signinForm()}
         </>
     )

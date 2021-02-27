@@ -12,6 +12,7 @@ import {
   DropdownItem,
   NavbarBrand,
 } from 'reactstrap';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { signout, isAuthenticated } from '../../actions/auth'
 import styles from '../Component.module.css'
 import { IoLogIn, IoPersonAddSharp } from 'react-icons/io5'
@@ -47,33 +48,41 @@ const Header = (props) => {
                 )
               ))
             } */}
-            <UncontrolledDropdown size="lg" nav inNavbar>
-              <DropdownToggle className={styles.Toggle_Start} style={{ color: "#ffffff" }} nav caret>
-                Get Started
+            {
+              !isAuthenticated() && (<React.Fragment>
+                <UncontrolledDropdown size="lg" nav inNavbar>
+                  <DropdownToggle className={styles.Toggle_Start} style={{ color: "#ffffff" }} nav caret>
+                    Get Started
               </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  <Link href="/signin"><span>Sign In</span></Link> &nbsp;<IoLogIn />
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  <Link href="/signup"><span>Sign Up</span></Link> &nbsp;<IoPersonAddSharp />
-                </DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                      <Link href="/signin"><span>Sign In</span></Link> &nbsp;<IoLogIn />
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>
+                      <Link href="/signup"><span>Sign Up</span></Link> &nbsp;<IoPersonAddSharp />
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+              </React.Fragment>
+              )
+            }
             {
               isAuthenticated() && (
-                <NavItem>
-                  <Link href="/signin">
-                    <NavLink onClick={() => signout(() => Router.replace(`/signin`))}>Sign Out</NavLink>
-                  </Link>
-                </NavItem>
+                <>
+                  <NavItem>
+                    <NavLink style={{ cursor: 'pointer', border: 'none', color: "#fff" }} onClick={() => signout(() => { Router.replace(`/signin`) })}> <ExitToAppIcon />Sign Out</NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <h5></h5>
+                  </NavItem>
+                  <NavItem style={{ marginTop: "6px", marginLeft: "8px" }}>
+                    <Tooltip title="Silvin Pradhan" arrow interactive><AccountCircleIcon /></Tooltip>
+                  </NavItem>
+                </>
               )
-
             }
-            <NavItem style={{ marginTop: "6px", marginLeft: "8px" }}>
-              <Tooltip title="Silvin Pradhan" arrow interactive><AccountCircleIcon /></Tooltip>
-            </NavItem>
+
           </Nav>
         </Collapse>
       </Navbar>
