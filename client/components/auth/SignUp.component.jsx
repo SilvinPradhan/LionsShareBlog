@@ -3,6 +3,8 @@ import { signup, isAuthenticated } from '../../actions/auth'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Router from 'next/router'
+import CustomButton from '../custom-button/custom-button.component';
+import styles from '../Component.module.css'
 
 const SignUpComponent = () => {
     const [values, setValues] = useState({
@@ -48,6 +50,9 @@ const SignUpComponent = () => {
     const showError = () => (error ? <div className="alert alert-danger"> {error}</div> : "");
     const showMessage = () => (message ? <div className="alert alert-info"> {message}</div> : "");
 
+    // Button Disabled if the fields are empty..
+    const isEnabled = email.length > 0 && password.length > 0
+
     const signupForm = () => {
         return (
             <form onSubmit={handleSubmit}>
@@ -66,7 +71,7 @@ const SignUpComponent = () => {
                 </div>
                 {/* Submit */}
                 <div className="form-group col text-center">
-                    {loading ? (<img src="/spinner.png" width="100px" height="100px" alt="Loading..." />) : (<button className="btn btn-primary">Register</button>)}
+                    {loading ? (<img src="/spinner.png" width="100px" height="100px" alt="Loading..." />) : (<CustomButton type="submit" className={styles.custom_button} disabled={!isEnabled}>Register</CustomButton>)}
                 </div>
             </form>
         )

@@ -15,7 +15,7 @@ const SignInComponent = () => {
     })
 
     // Destructure te values from the state.
-    const { email, password, error, loading, message, showForm } = values;
+    const { name, email, password, error, loading, message, showForm } = values;
 
     useEffect(() => {
         // Check if there is a token and user data in localstorage as well as cookie, redirect the logged in user to homepage
@@ -26,7 +26,7 @@ const SignInComponent = () => {
         e.preventDefault();
         // console.table({ name, email, password, error, loading, message, showForm })
         setValues({ ...values, loading: true, error: false })
-        const user = { email, password }
+        const user = { name, email, password }
 
         await signin(user).then(data => {
             if (data.error) {
@@ -52,6 +52,9 @@ const SignInComponent = () => {
     const showError = () => (error ? <div className="alert alert-danger"> {error}</div> : "");
     const showMessage = () => (message ? <div className="alert alert-info"> {message}</div> : "");
 
+    // Button Disabled if the fields are empty..
+    const isEnabled = email.length > 0 && password.length > 0
+
     const signinForm = () => {
         return (
             <form onSubmit={handleSubmit}>
@@ -66,7 +69,7 @@ const SignInComponent = () => {
                 </div>
                 {/* Submit */}
                 <div className="form-group col text-center">
-                    {loading ? (<img src="/spinner.png" width="100px" height="100px" alt="Loading..." />) : (<button className="btn btn-primary">Login</button>)}
+                    {loading ? (<img src="/spinner.png" width="100px" height="100px" alt="Loading..." />) : (<button className="btn btn-primary" disabled={!isEnabled}>Login</button>)}
                 </div>
             </form>
         )

@@ -1,29 +1,52 @@
 .App_Name {
-  text-decoration: none;
-  cursor: pointer;
-  color: #ffffff;
-  font-size: large;
-  font-weight: 700;
-  margin-left: -20px;
+	text-decoration: none;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: large;
+	font-weight: 700;
+	margin-left: -20px;
 }
 
 .App_Name:hover {
-  color: #e8fced;
+	color: #e8fced;
 }
 
 .navbar_toggler {
-  border: 0.7px solid rgba(255, 255, 255);
-  background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='-6 0 40 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255)' stroke-width='1.6' stroke-linecap='round' stroke-miterlimit='5' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+	border: 0.7px solid rgba(255, 255, 255);
+	background-repeat: no-repeat;
+	background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='-6 0 40 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255)' stroke-width='1.6' stroke-linecap='round' stroke-miterlimit='5' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
 }
 
 .Toggle_Start {
-  background-color: #503aa1;
-  border: none;
-  border-radius: 10px;
-  opacity: 0.9;
+	background-color: #503aa1;
+	border: none;
+	border-radius: 10px;
+	opacity: 0.9;
 }
 
 .Toggle_Start:hover {
-  opacity: 1;
+	opacity: 1;
+}
+
+.custom_button {
+	min-width: 165px;
+	width: auto;
+	height: 50px;
+	letter-spacing: 0.5px;
+	line-height: 50px;
+	padding: 0 35px 0 35px;
+	font-size: 15px;
+	background-color: #329962;
+	color: white;
+	text-transform: uppercase;
+	font-weight: bolder;
+	border-radius: 2px;
+	border: none;
+	cursor: pointer;
+}
+
+.custom_button:hover {
+	background-color: white;
+	color: #329962;
+	border: 1px solid #329962;
 }
