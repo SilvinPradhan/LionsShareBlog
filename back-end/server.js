@@ -1,53 +1,55 @@
-const express = require("express");
-const morgan = require("morgan");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const mongoose = require("mongoose");
-require("dotenv").config();
+const express = require('express');
+const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 // Import Routes
-const blogRoutes = require("./routes/blog");
-const authRoutes = require("./routes/auth");
+const blogRoutes = require('./routes/blog');
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 // App configuration
 const app = express();
 
 // Database
 const db = async () => {
-  try {
-    const success = await mongoose.connect(process.env.DATABASE, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-      useUnifiedTopology: true,
-    });
-    console.log("MongoDB connected.");
-  } catch (err) {
-    console.log("Something is wrong in the DB connection", err);
-  }
+	try {
+		const success = await mongoose.connect(process.env.DATABASE, {
+			useNewUrlParser: true,
+			useCreateIndex: true,
+			useFindAndModify: false,
+			useUnifiedTopology: true,
+		});
+		console.log('MongoDB connected.');
+	} catch (err) {
+		console.log('Something is wrong in the DB connection', err);
+	}
 };
 
 // Run DB connection
 db();
 
 // Middlewares
-app.use(morgan("dev"));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
 // Cors
-if (process.env.NODE_ENV === "development") {
-  app.use(
-    cors({
-      origin: `${process.env.CLIENT_URL}`,
-    })
-  );
+if (process.env.NODE_ENV === 'development') {
+	app.use(
+		cors({
+			origin: `${process.env.CLIENT_URL}`,
+		})
+	);
 }
 
 // Routes middlewares
-app.use("/api", blogRoutes);
-app.use("/api", authRoutes);
+app.use('/api', blogRoutes);
+app.use('/api', authRoutes);
+app.use('/api', userRoutes);
 
 // Routes
 // app.get("/api", (req, res) => {
@@ -59,5 +61,5 @@ app.use("/api", authRoutes);
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}.`);
+	console.log(`Server is running at http://localhost:${port}.`);
 });

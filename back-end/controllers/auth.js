@@ -56,21 +56,20 @@ exports.signin = (req, res) => {
 					error: 'Email and password do not match.',
 				});
 			}
-
-			// Generate a token and send to the client interface, includes userID and secret
-			// Signed Token
-			const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY, {
-				expiresIn: '1d',
-			});
-			// Save the token in the cookie
-			res.cookie('token', token, { expiresIn: '1d' });
-			const { _id, username, name, email, role } = user;
-			// It will display hash_password if not hidden. So,lets just send user: { _id, username, name, email, role },
-			return res.json({
-				token,
-				user: { _id, username, name, email, role },
-			});
 		}
+		// Generate a token and send to the client interface, includes userID and secret
+		// Signed Token
+		const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET_KEY, {
+			expiresIn: '1d',
+		});
+		// Save the token in the cookie
+		res.cookie('token', token, { expiresIn: '1d' });
+		const { _id, username, name, email, role } = user;
+		// It will display hash_password if not hidden. So,lets just send user: { _id, username, name, email, role },
+		return res.json({
+			token,
+			user: { _id, username, name, email, role },
+		});
 	});
 };
 
@@ -89,3 +88,36 @@ exports.requireSignin = expressJwt({
 	algorithms: ['HS256'],
 	userProperty: 'auth',
 });
+
+exports.authMiddleware = (req, res, next) => {
+	const authUserId = req.user._id;
+	User.findById({ _id: authUserId }).exec((err, user) => {
+		if (err || !user) {
+			return res.status(400).json({
+				error: 'User not found',
+			});
+		}
+		req.profile = user;
+		next();
+	});
+};
+
+exports.adminMiddleware = (req, res, next) => {
+	const adminUserId = req.user._id;
+	User.findById({ _id: adminUserId }).exec((err, user) => {
+		if (err || !user) {
+			return res.status(400).json({
+				error: 'User not found',
+			});
+		}
+
+		if (user.role !== 1) {
+			return res.status(400).json({
+				error: 'Admin resource. Access denied',
+			});
+		}
+
+		req.profile = user;
+		next();
+	});
+};
