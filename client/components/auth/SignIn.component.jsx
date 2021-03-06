@@ -39,7 +39,11 @@ const SignInComponent = () => {
                 // save user info to localStorage
                 // authenticate user
                 authenticate(data, () => {
-                    Router.push(`/`)
+                    if (isAuthenticated() && isAuthenticated().role === 1) {
+                        Router.push(`/admin`);
+                    } else {
+                        Router.push(`/user`);
+                    }
                 })
                 toast.success(`You have signed in as ${user.name}`)
             }
