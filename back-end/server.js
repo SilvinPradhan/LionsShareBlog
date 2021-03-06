@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const chalk = require('chalk');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
@@ -23,9 +24,9 @@ const db = async () => {
 			useFindAndModify: false,
 			useUnifiedTopology: true,
 		});
-		console.log('MongoDB connected.');
+		console.log(chalk.cyan.bold('MongoDB connected.'));
 	} catch (err) {
-		console.log('Something is wrong in the DB connection', err);
+		console.log(chalk.redBright('Something is wrong in the DB connection'), err);
 	}
 };
 
@@ -61,5 +62,5 @@ app.use('/api', userRoutes);
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
-	console.log(`Server is running at http://localhost:${port}.`);
+	console.log('Server is running at ' + chalk.blueBright.bold(`http://localhost:${port}`));
 });
