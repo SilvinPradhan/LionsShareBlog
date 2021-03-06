@@ -49,7 +49,7 @@ if (process.env.NODE_ENV === 'development') {
 // Routes middlewares
 app.use('/api', blogRoutes);
 app.use('/api', authRoutes);
-// app.use('/api', userRoutes);
+app.use('/api', userRoutes);
 
 // Routes
 // app.get("/api", (req, res) => {

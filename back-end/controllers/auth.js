@@ -3,12 +3,6 @@ const shortId = require('shortid');
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 
-// Route for profile - give the user profile
-exports.read = (req, res) => {
-	req.profile.hashed_password = undefined;
-	return res.json(req.profile);
-};
-
 // Sign Up Methods
 exports.signup = (req, res) => {
 	// const { name, email, password } = req.body;
