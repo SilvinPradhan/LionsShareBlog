@@ -90,4 +90,4 @@ const SignInComponent = () => {
     )
 }
 
-export default SignInComponent
+export default SignInComponent;
