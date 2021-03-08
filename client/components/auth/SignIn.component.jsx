@@ -45,7 +45,7 @@ const SignInComponent = () => {
                         Router.push(`/user`);
                     }
                 })
-                toast.success(`You have signed in as ${user.name}`)
+                toast.success(`You have signed in as ${isAuthenticated().name}`)
             }
         })
 
