@@ -67,17 +67,39 @@ const Header = (props) => {
               </React.Fragment>
               )
             }
+
+            {
+              isAuthenticated() && isAuthenticated().role === 0 && (
+                <>
+                  <NavItem>
+                    <Link href="/user">
+                      <NavLink> {`${isAuthenticated().name}'s Dashboard`} </NavLink>
+                    </Link>
+                  </NavItem>
+                </>
+              )
+            }
+
+            {
+              isAuthenticated() && isAuthenticated().role === 1 && (
+                <>
+                  <NavItem>
+                    <Link href="/admin">
+                      <NavLink> {`${isAuthenticated().name}'s Dashboard`} </NavLink>
+                    </Link>
+                  </NavItem>
+                </>
+              )
+            }
+
             {
               isAuthenticated() && (
                 <>
-                  <NavItem>
-                    <NavLink style={{ cursor: 'pointer', border: 'none', color: "#fff" }} onClick={() => signout(() => { Router.replace(`/signin`) })}> <ExitToAppIcon />Sign Out</NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <h5></h5>
-                  </NavItem>
                   <NavItem style={{ marginTop: "6px", marginLeft: "8px" }}>
                     <Tooltip title="Silvin Pradhan" arrow interactive><AccountCircleIcon /></Tooltip>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink style={{ cursor: 'pointer', border: 'none', color: "#fff" }} onClick={() => signout(() => { Router.replace(`/signin`) })}> <ExitToAppIcon />Sign Out</NavLink>
                   </NavItem>
                 </>
               )
