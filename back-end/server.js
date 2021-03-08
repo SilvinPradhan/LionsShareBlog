@@ -11,6 +11,7 @@ require('dotenv').config();
 const blogRoutes = require('./routes/blog');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
+const categoryRoutes = require('./routes/category');
 
 // App configuration
 const app = express();
@@ -51,6 +52,7 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api', blogRoutes);
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
+app.use('/api', categoryRoutes);
 
 // Routes
 // app.get("/api", (req, res) => {
