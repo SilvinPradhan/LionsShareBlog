@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NProgress from 'nprogress'
 import {
   Collapse,
   Navbar,
@@ -21,6 +22,10 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 // import { menuData } from '../../MenuData/menu';
 import { Tooltip } from '@material-ui/core';
 import Router from 'next/router';
+
+Router.onRouteChangeStart = url => NProgress.start();
+Router.onRouteChangeComplete = url => NProgress.done();
+Router.onRouteChangeError = url => NProgress.done();
 
 const Header = (props) => {
   const [isOpen, setIsOpen] = useState(false);
