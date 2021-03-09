@@ -12,6 +12,7 @@ const blogRoutes = require('./routes/blog');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/category');
+const tagRoutes = require('./routes/tag');
 
 // App configuration
 const app = express();
@@ -53,6 +54,7 @@ app.use('/api', blogRoutes);
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
+app.use('/api', tagRoutes);
 
 // Routes
 // app.get("/api", (req, res) => {
