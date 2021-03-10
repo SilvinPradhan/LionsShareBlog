@@ -78,7 +78,7 @@ const Header = (props) => {
                 <>
                   <NavItem>
                     <Link href="/user">
-                      <NavLink> {`${isAuthenticated().name}'s Dashboard`} </NavLink>
+                      <NavLink className={styles.User_Dashboard}> {`${isAuthenticated().name}'s Dashboard`} </NavLink>
                     </Link>
                   </NavItem>
                 </>
@@ -90,7 +90,7 @@ const Header = (props) => {
                 <>
                   <NavItem>
                     <Link href="/admin">
-                      <NavLink> {`${isAuthenticated().name}'s Dashboard`} </NavLink>
+                      <NavLink className={styles.Admin_Dashboard}> {`${isAuthenticated().name}'s Dashboard`} </NavLink>
                     </Link>
                   </NavItem>
                 </>

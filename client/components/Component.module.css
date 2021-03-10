@@ -50,3 +50,26 @@
 	color: #334aa6;
 	border: 1px solid #334aa6;
 }
+
+.User_Dashboard {
+	text-decoration: none;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: large;
+	font-weight: 700;
+}
+
+.Admin_Dashboard {
+	background-color: #5943a7;
+	border: none;
+	border-radius: 10px;
+	text-decoration: none;
+	cursor: pointer;
+	color: #ffffff;
+	font-weight: 500;
+}
+.Admin_Dashboard:hover {
+	border: none;
+	background-color: #503aa1;
+	color: #ffffff;
+}
