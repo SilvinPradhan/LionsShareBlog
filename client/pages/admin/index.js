@@ -31,19 +31,19 @@ const AdminIndex = () => {
 				<div className={classes.root}>
 					<Grid container spacing={3}>
 						<Grid item xs={12}>
-							<Paper className={classes.paper} style={{ color: 'black' }}>
+							<Paper className={classes.paper} style={{ color: 'black', cursor: 'pointer' }}>
 								{' '}
 								<RiAdminFill /> &nbsp; Admin Dashboard
 							</Paper>
 						</Grid>
 						<Grid item xs={12} sm={6}>
-							<Paper className={classes.paper} style={{ color: '#2f3bc2' }}>
+							<Paper className={classes.paper} style={{ color: '#2f3bc2', cursor: 'pointer' }}>
 								{' '}
 								<CategorySharpIcon /> &nbsp; Category
 							</Paper>
 						</Grid>
 						<Grid item xs={12} sm={6}>
-							<Paper className={classes.paper} style={{ color: '#2f3bc2' }}>
+							<Paper className={classes.paper} style={{ color: '#2f3bc2', cursor: 'pointer' }}>
 								<FaHashtag /> &nbsp; Tags
 							</Paper>
 						</Grid>
