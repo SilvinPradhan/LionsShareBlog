@@ -2,9 +2,8 @@ import React from 'react';
 import Layout from '../../../components/Layout';
 import Admin from '../../../components/auth/Admin';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardActions, CardContent, Typography } from '@material-ui/core';
-import CustomButton from '../../../components/custom-button/custom-button.component';
-import styles from '../../../components/Component.module.css';
+import { Card, CardContent, Typography } from '@material-ui/core';
+import Category from '../../../components/crud/Category';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -54,16 +53,13 @@ const CategoryTag = () => {
 					<div className="container-fluid">
 						<div className="row">
 							<div className="col-md-4">
-								<p> Categories</p>
+								<Category />
 							</div>
 							<div className="col-md-4">
 								<p> Tags</p>
 							</div>
 						</div>
 					</div>
-					{/* <CardActions>
-						<CustomButton className={classes.button}>Create</CustomButton>
-					</CardActions> */}
 				</Card>
 			</Admin>
 		</Layout>
