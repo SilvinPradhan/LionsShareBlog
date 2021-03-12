@@ -29,10 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/admin.js"
     ],
-    "/signin": [
+    "/admin/crud/category-tag": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/signin.js"
+      "static/chunks/pages/admin/crud/category-tag.js"
     ]
   },
   "ampFirstPages": []
