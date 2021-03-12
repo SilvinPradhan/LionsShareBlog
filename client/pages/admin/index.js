@@ -9,6 +9,7 @@ import { FaHashtag } from 'react-icons/fa';
 import { RiAdminFill } from 'react-icons/ri';
 
 import { isAuthenticated } from '../../actions/auth';
+import { Divider, List, ListItem, ListItemText } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -17,6 +18,15 @@ const useStyles = makeStyles((theme) => ({
 	},
 	paper: {
 		padding: theme.spacing(1.5),
+		textAlign: 'center',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		color: theme.palette.text.secondary,
+	},
+	adminPaper: {
+		padding: theme.spacing(2),
+		margin: 'auto',
 		textAlign: 'center',
 		display: 'flex',
 		justifyContent: 'center',
@@ -34,9 +44,13 @@ const AdminIndex = () => {
 					<Grid container spacing={3}>
 						<Grid item xs={12}>
 							{isAuthenticated() ? (
-								<Paper className={classes.paper} style={{ color: 'black', cursor: 'pointer' }}>
+								<Paper
+									className={classes.adminPaper}
+									style={{ color: 'black', cursor: 'pointer', padding: 20 }}
+								>
 									{' '}
-									<RiAdminFill /> &nbsp; {`${isAuthenticated().name}`}'s Dashboard
+									<RiAdminFill />
+									&nbsp; Welcome to your dashboard, <b>{`${isAuthenticated().name}`}</b>
 								</Paper>
 							) : (
 								''
@@ -47,10 +61,26 @@ const AdminIndex = () => {
 								{' '}
 								<CategorySharpIcon /> &nbsp; Category
 							</Paper>
+							<Paper style={{ marginTop: 5 }}>
+								<List component="nav">
+									<ListItem>
+										<ListItemText primary="Trash" />
+									</ListItem>
+								</List>
+								<Divider />
+							</Paper>
 						</Grid>
 						<Grid item xs={12} sm={6}>
 							<Paper className={classes.paper} style={{ color: '#2f3bc2', cursor: 'pointer' }}>
 								<FaHashtag /> &nbsp; Tags
+							</Paper>
+							<Paper style={{ marginTop: 5 }}>
+								<List component="nav">
+									<ListItem>
+										<ListItemText primary="Trash" />
+									</ListItem>
+								</List>
+								<Divider />
 							</Paper>
 						</Grid>
 					</Grid>
