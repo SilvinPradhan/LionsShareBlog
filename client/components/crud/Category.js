@@ -8,6 +8,7 @@ import { CardActions, FormControl, Input, InputLabel, InputAdornment } from '@ma
 import React from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import ClassIcon from '@material-ui/icons/Class';
+import { ToastContainer, toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
 	margin: {
@@ -54,6 +55,7 @@ const Category = (props) => {
 				setValues({ ...values, error: data.error, success: false });
 			} else {
 				setValues({ ...values, error: false, success: true, name: '' });
+				toast.success(`A Category named '${name}' has been created.`);
 			}
 		});
 	};
@@ -65,6 +67,17 @@ const Category = (props) => {
 	const newCategoryForm = () => (
 		<>
 			<form onSubmit={clickSubmit}>
+				<ToastContainer
+					position="top-right"
+					autoClose={8000}
+					hideProgressBar={false}
+					newestOnTop
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable
+					pauseOnHover
+				/>
 				<FormControl className={classes.margin}>
 					<InputLabel htmlFor="input-with-category-icon">Category Name:</InputLabel>
 					<Input
