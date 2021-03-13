@@ -47,22 +47,45 @@ const Category = (props) => {
 	const { name, error, success, categories, removed } = values;
 	const token = getCookie('token');
 
+	const clickSubmit = (e) => {
+		e.preventDefault();
+		create({ name }, token).then((data) => {
+			if (data.error) {
+				setValues({ ...values, error: data.error, success: false });
+			} else {
+				setValues({ ...values, error: false, success: true, name: '' });
+			}
+		});
+	};
+
+	const handleChange = (e) => {
+		setValues({ ...values, name: e.target.value, error: false, success: false, removed: '' });
+	};
+
 	const newCategoryForm = () => (
 		<>
-			<FormControl className={classes.margin}>
-				<InputLabel htmlFor="input-with-category-icon">Category Name:</InputLabel>
-				<Input
-					id="input-with-category-icon"
-					startAdornment={
-						<InputAdornment position="start">
-							<ClassIcon />
-						</InputAdornment>
-					}
-				/>
-				<CardActions>
-					<CustomButton className={classes.button}>Create</CustomButton>
-				</CardActions>
-			</FormControl>
+			<form onSubmit={clickSubmit}>
+				<FormControl className={classes.margin}>
+					<InputLabel htmlFor="input-with-category-icon">Category Name:</InputLabel>
+					<Input
+						id="input-with-category-icon"
+						type="text"
+						onChange={handleChange}
+						value={name}
+						required
+						startAdornment={
+							<InputAdornment position="start">
+								<ClassIcon />
+							</InputAdornment>
+						}
+					/>
+					<CardActions>
+						<CustomButton type="submit" className={classes.button}>
+							Create
+						</CustomButton>
+					</CardActions>
+				</FormControl>
+			</form>
 		</>
 	);
 	return <React.Fragment>{newCategoryForm()}</React.Fragment>;
