@@ -3,8 +3,8 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { isAuthenticated, getCookie } from '../../actions/auth';
 import { makeStyles } from '@material-ui/core/styles';
-import { create } from '../../actions/category';
-import { CardActions, FormControl, Input, InputLabel, InputAdornment } from '@material-ui/core';
+import { create, getCategories, removeCategory } from '../../actions/category';
+import { CardActions, FormControl, Input, InputLabel, InputAdornment, Button, Tooltip } from '@material-ui/core';
 import React from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import ClassIcon from '@material-ui/icons/Class';
@@ -43,10 +43,37 @@ const Category = (props) => {
 		success: false,
 		categories: [],
 		removed: false,
+		reload: false,
 	});
 
-	const { name, error, success, categories, removed } = values;
+	const { name, error, success, categories, removed, reload } = values;
 	const token = getCookie('token');
+
+	useEffect(() => {
+		loadCategories();
+	}, [reload]);
+
+	const loadCategories = () => {
+		getCategories().then((data) => {
+			if (data.error) {
+				console.log(data.error);
+			} else {
+				setValues({ ...values, categories: data });
+			}
+		});
+	};
+
+	const showCategories = () => {
+		return categories.map((item, index) => {
+			return (
+				<Tooltip interactive title="Double Click to Delete" arrow>
+					<Button key={index} className={classes.button}>
+						{item.name}
+					</Button>
+				</Tooltip>
+			);
+		});
+	};
 
 	const clickSubmit = (e) => {
 		e.preventDefault();
@@ -54,7 +81,7 @@ const Category = (props) => {
 			if (data.error) {
 				setValues({ ...values, error: data.error, success: false });
 			} else {
-				setValues({ ...values, error: false, success: true, name: '' });
+				setValues({ ...values, error: false, success: true, name: '', removed: !removed, reload: !reload });
 				toast.success(`A Category named '${name}' has been created.`);
 			}
 		});
@@ -101,7 +128,12 @@ const Category = (props) => {
 			</form>
 		</>
 	);
-	return <React.Fragment>{newCategoryForm()}</React.Fragment>;
+	return (
+		<React.Fragment>
+			{newCategoryForm()}
+			<div>{showCategories()}</div>
+		</React.Fragment>
+	);
 };
 
 export default Category;
