@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Button, Card, CardContent, Typography } from '@material-ui/core';
 import Category from '../../../components/crud/Category';
 import { CardText, CardTitle, Col, Row } from 'reactstrap';
+import CustomButton from '../../../components/custom-button/custom-button.component';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -68,9 +69,9 @@ const CategoryTag = (props) => {
 					</Col>
 					<Col sm="5">
 						<Card body>
-							<CardTitle tag="h5">Tag</CardTitle>
+							<CardTitle tag="h5">Create Tag</CardTitle>
 							<CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-							<Button>Go somewhere</Button>
+							<CustomButton>Create Tag</CustomButton>
 						</Card>
 					</Col>
 				</Row>
