@@ -2,18 +2,27 @@ import React from 'react';
 import Layout from '../../../components/Layout';
 import Admin from '../../../components/auth/Admin';
 import { makeStyles } from '@material-ui/core/styles';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Button, Card, CardContent, Typography } from '@material-ui/core';
 import Category from '../../../components/crud/Category';
+import { CardText, CardTitle, Col, Row } from 'reactstrap';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
+		marginTop: '10px',
 		margin: 'auto',
-		maxHeight: 300,
-		maxWidth: 500,
+		maxWidth: 350,
 		background: 'white',
 	},
+	row: {
+		position: 'fixed',
+		top: '50%',
+		left: '50%',
+		transform: 'translate(-50%, -50%)',
+	},
 	title: {
-		fontSize: 16,
+		fontWeight: 'bolder',
+		fontSize: 19,
+		color: '#1b0975',
 		alignItems: 'center',
 		textAlign: 'center',
 		justifyContent: 'center',
@@ -39,28 +48,32 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const CategoryTag = () => {
+const CategoryTag = (props) => {
 	const classes = useStyles();
 	return (
 		<Layout>
 			<Admin>
 				<Card className={classes.root}>
 					<CardContent>
-						<Typography className={classes.title} color="textSecondary" gutterBottom>
-							Manage Categories and Tags
-						</Typography>
+						<Typography className={classes.title}>Manage Categories and Tags</Typography>
 					</CardContent>
-					<div className="container-fluid">
-						<div className="row">
-							<div className="col-md-4">
-								<Category />
-							</div>
-							<div className="col-md-4">
-								<p> Tags</p>
-							</div>
-						</div>
-					</div>
 				</Card>
+				<Row className={classes.row}>
+					<Col sm="5">
+						<Card body>
+							<CardContent>
+								<Category />
+							</CardContent>
+						</Card>
+					</Col>
+					<Col sm="5">
+						<Card body>
+							<CardTitle tag="h5">Tag</CardTitle>
+							<CardText>With supporting text below as a natural lead-in to additional content.</CardText>
+							<Button>Go somewhere</Button>
+						</Card>
+					</Col>
+				</Row>
 			</Admin>
 		</Layout>
 	);

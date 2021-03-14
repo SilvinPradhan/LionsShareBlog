@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Router from 'next/router';
 import { isAuthenticated, getCookie } from '../../actions/auth';
 import { makeStyles } from '@material-ui/core/styles';
 import { create, getCategories, removeCategory } from '../../actions/category';
@@ -9,6 +7,7 @@ import React from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import ClassIcon from '@material-ui/icons/Class';
 import { ToastContainer, toast } from 'react-toastify';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
 const useStyles = makeStyles((theme) => ({
 	margin: {
@@ -32,6 +31,12 @@ const useStyles = makeStyles((theme) => ({
 		'&:hover': {
 			backgroundColor: '#525ed9',
 		},
+	},
+	buttonList: {
+		border: '0.5px solid #e8e8e8',
+		textTransform: 'capitalize',
+		justifyContent: 'space-between',
+		display: 'inline-block',
 	},
 }));
 
@@ -67,7 +72,7 @@ const Category = (props) => {
 		return categories.map((item, index) => {
 			return (
 				<Tooltip interactive title="Double Click to Delete" arrow>
-					<Button key={index} className={classes.button}>
+					<Button key={index} className={classes.buttonList}>
 						{item.name}
 					</Button>
 				</Tooltip>
@@ -131,7 +136,11 @@ const Category = (props) => {
 	return (
 		<React.Fragment>
 			{newCategoryForm()}
-			<div>{showCategories()}</div>
+			<div>
+				<ListGroup>
+					<ListGroupItem>{showCategories()}</ListGroupItem>
+				</ListGroup>
+			</div>
 		</React.Fragment>
 	);
 };
