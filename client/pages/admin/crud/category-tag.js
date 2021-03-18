@@ -2,10 +2,10 @@ import React from 'react';
 import Layout from '../../../components/Layout';
 import Admin from '../../../components/auth/Admin';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button, Card, CardContent, Typography } from '@material-ui/core';
+import { Card, CardContent, Typography } from '@material-ui/core';
 import Category from '../../../components/crud/Category';
-import { CardText, CardTitle, Col, Row } from 'reactstrap';
-import CustomButton from '../../../components/custom-button/custom-button.component';
+import { Col, Row } from 'reactstrap';
+import Tag from '../../../components/crud/Tag';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -54,11 +54,11 @@ const CategoryTag = (props) => {
 	return (
 		<Layout>
 			<Admin>
-				<Card className={classes.root}>
+				<Row className={classes.root}>
 					<CardContent>
 						<Typography className={classes.title}>Manage Categories and Tags</Typography>
 					</CardContent>
-				</Card>
+				</Row>
 				<Row className={classes.row}>
 					<Col sm="5">
 						<Card body>
@@ -69,9 +69,9 @@ const CategoryTag = (props) => {
 					</Col>
 					<Col sm="5">
 						<Card body>
-							<CardTitle tag="h5">Create Tag</CardTitle>
-							<CardText>With supporting text below as a natural lead-in to additional content.</CardText>
-							<CustomButton>Create Tag</CustomButton>
+							<CardContent>
+								<Tag />
+							</CardContent>
 						</Card>
 					</Col>
 				</Row>

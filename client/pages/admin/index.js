@@ -93,7 +93,9 @@ const AdminIndex = () => {
 							<Paper style={{ marginTop: 5 }} className={classes.createPaper}>
 								<List component="nav">
 									<ListItem>
-										<ListItemText primary="Create Tags" />
+										<Link href="/admin/crud/category-tag">
+											<ListItemText primary="Create Tags" />
+										</Link>
 									</ListItem>
 								</List>
 								<Divider />

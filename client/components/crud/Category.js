@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { isAuthenticated, getCookie } from '../../actions/auth';
+import { getCookie } from '../../actions/auth';
 import { makeStyles } from '@material-ui/core/styles';
 import { create, getCategories, removeCategory } from '../../actions/category';
 import { CardActions, FormControl, Input, InputLabel, InputAdornment, Button, Tooltip } from '@material-ui/core';
 import React from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import ClassIcon from '@material-ui/icons/Class';
-import { ToastContainer, toast } from 'react-toastify';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 
 const useStyles = makeStyles((theme) => ({
@@ -64,6 +63,7 @@ const Category = (props) => {
 				console.log(data.error);
 			} else {
 				setValues({ ...values, categories: data });
+				console.log(categories);
 			}
 		});
 	};
@@ -72,12 +72,31 @@ const Category = (props) => {
 		return categories.map((item, index) => {
 			return (
 				<Tooltip interactive title="Double Click to Delete" arrow>
-					<Button key={index} className={classes.buttonList}>
+					<button
+						onDoubleClick={() => confirmDelete(item.slug)}
+						key={index}
+						className="btn btn-outline-primary mr-1 ml-1 mt-3"
+					>
 						{item.name}
-					</Button>
+					</button>
 				</Tooltip>
 			);
 		});
+	};
+
+	const confirmDelete = (slug) => {
+		let answer = window.confirm(`Do you want to delete "${slug}" category? `);
+		if (answer) {
+			deleteCategory(slug);
+		}
+	};
+
+	const deleteCategory = (slug) => {
+		removeCategory(slug, token).then((data) => {
+			if (data.error) console.log(data.error);
+			else setValues({ ...values, error: false, success: false, name: '', removed: !removed, reload: !reload });
+		});
+		console.log('deletes', slug);
 	};
 
 	const clickSubmit = (e) => {
@@ -86,8 +105,7 @@ const Category = (props) => {
 			if (data.error) {
 				setValues({ ...values, error: data.error, success: false });
 			} else {
-				setValues({ ...values, error: false, success: true, name: '', removed: !removed, reload: !reload });
-				toast.success(`A Category named '${name}' has been created.`);
+				setValues({ ...values, error: false, success: true, name: '', removed: false, reload: !reload });
 			}
 		});
 	};
@@ -96,20 +114,31 @@ const Category = (props) => {
 		setValues({ ...values, name: e.target.value, error: false, success: false, removed: '' });
 	};
 
+	const successMessage = () => {
+		if (success) {
+			return <p className="text-success">Category successfully created!</p>;
+		}
+	};
+
+	const errorMessage = () => {
+		if (error) {
+			return <p className="text-info">Category already created!</p>;
+		}
+	};
+
+	const deletedMessage = () => {
+		if (removed) {
+			return <p className="text-danger">Category successfully deleted!</p>;
+		}
+	};
+
+	const mouseMoveHandler = (e) => {
+		setValues({ ...values, error: false, success: false, removed: '' });
+	};
+
 	const newCategoryForm = () => (
 		<>
 			<form onSubmit={clickSubmit}>
-				<ToastContainer
-					position="top-right"
-					autoClose={8000}
-					hideProgressBar={false}
-					newestOnTop
-					closeOnClick
-					rtl={false}
-					pauseOnFocusLoss
-					draggable
-					pauseOnHover
-				/>
 				<FormControl className={classes.margin}>
 					<InputLabel htmlFor="input-with-category-icon">Category Name:</InputLabel>
 					<Input
@@ -135,8 +164,11 @@ const Category = (props) => {
 	);
 	return (
 		<React.Fragment>
-			{newCategoryForm()}
-			<div>
+			{successMessage()}
+			{errorMessage()}
+			{deletedMessage()}
+			<div onMouseMove={mouseMoveHandler}>
+				{newCategoryForm()}
 				<ListGroup>
 					<ListGroupItem>{showCategories()}</ListGroupItem>
 				</ListGroup>
