@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema;
+
 const blogSchema = new mongoose.Schema(
 	{
 		title: {
@@ -8,7 +9,6 @@ const blogSchema = new mongoose.Schema(
 			min: 3,
 			max: 160,
 			required: true,
-			index: true,
 		},
 		slug: {
 			type: String,
@@ -19,17 +19,16 @@ const blogSchema = new mongoose.Schema(
 			type: {},
 			required: true,
 			min: 200,
-			max: 200000,
+			max: 2000000,
 		},
 		excerpt: {
 			type: String,
-			required: true,
 			max: 1000,
 		},
-		metaTitle: {
+		mtitle: {
 			type: String,
 		},
-		metaDescription: {
+		mdesc: {
 			type: String,
 		},
 		photo: {
@@ -43,6 +42,7 @@ const blogSchema = new mongoose.Schema(
 			ref: 'User',
 		},
 	},
-	{ timestamps: true }
+	{ timestamp: true }
 );
+
 module.exports = mongoose.model('Blog', blogSchema);
