@@ -14,13 +14,13 @@ exports.create = (req, res) => {
 	form.parse(req, (err, fields, files) => {
 		if (err) {
 			return res.status(400).json({
-				error: 'Image could not upload',
+				error: 'Image could not be uploaded',
 			});
 		}
-
+		console.log(fields);
 		const { title, body, categories, tags } = fields;
 
-		let blog = new Blog();
+		const blog = new Blog();
 		blog.title = title;
 		blog.body = body;
 		blog.slug = slugify(title).toLowerCase();
