@@ -24,8 +24,8 @@ exports.create = (req, res) => {
 		blog.body = body;
 		blog.slug = slugify(title);
 		blog.mtitle = `${title} | ${process.env.APP_NAME}`;
-		// blog.mdesc = stripHtml(body.substring(0, 160));
-		// blog.postedBy = req.user._id;
+		blog.mdesc = stripHtml(body.substring(0, 160)).result;
+		blog.postedBy = req.user._id;
 
 		// if (files.photo) {
 		// 	if (files.photo.size > 10000000) {
