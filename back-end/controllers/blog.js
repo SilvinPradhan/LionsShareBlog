@@ -19,6 +19,27 @@ exports.create = (req, res) => {
 
 		const { title, body, categories, tags } = fields;
 
+		if (!title || !title.length) {
+			return res.status(400).json({
+				error: 'Title is required.',
+			});
+		}
+		if (!body || !body.length > 200) {
+			return res.status(400).json({
+				error: 'Content is less or equal to 200',
+			});
+		}
+		if (!categories || !categories.length === 0) {
+			return res.status(400).json({
+				error: 'Please add one "category,." At least one category  is required.',
+			});
+		}
+		if (!tags || !tags.length === 0) {
+			return res.status(400).json({
+				error: 'Please add one "tag." At least one tag is required.',
+			});
+		}
+
 		let blog = new Blog();
 		blog.title = title;
 		blog.body = body;
