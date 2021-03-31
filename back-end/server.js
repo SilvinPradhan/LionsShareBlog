@@ -39,7 +39,6 @@ db();
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.set('view engine', 'ejs');
 
 // Cors
 if (process.env.NODE_ENV === 'development') {
