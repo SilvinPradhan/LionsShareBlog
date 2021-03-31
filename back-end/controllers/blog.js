@@ -27,15 +27,15 @@ exports.create = (req, res) => {
 		blog.mdesc = stripHtml(body.substring(0, 160)).result;
 		blog.postedBy = req.user._id;
 
-		// if (files.photo) {
-		// 	if (files.photo.size > 10000000) {
-		// 		return res.status(400).json({
-		// 			error: 'Image should be less then 1mb in size',
-		// 		});
-		// 	}
-		// 	blog.photo.data = fs.readFileSync(files.photo.path);
-		// 	blog.photo.contentType = files.photo.type;
-		// }
+		if (files.photo) {
+			if (files.photo.size > 10000000) {
+				return res.status(400).json({
+					error: 'Image should be less then 1mb in size',
+				});
+			}
+			blog.photo.data = fs.readFileSync(files.photo.path);
+			blog.photo.contentType = files.photo.type;
+		}
 
 		blog.save((err, result) => {
 			if (err) {
