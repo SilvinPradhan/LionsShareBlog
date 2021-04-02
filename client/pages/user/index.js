@@ -8,6 +8,7 @@ const UserIndex = () => {
 		<Layout>
 			<Private>
 				<h2>User Dashboard</h2>
+				{/* Github Profile Finder Goes Here! */}
 			</Private>
 		</Layout>
 	);

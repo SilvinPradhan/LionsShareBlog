@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import CategorySharpIcon from '@material-ui/icons/Category';
 import { FaHashtag } from 'react-icons/fa';
 import { RiAdminFill } from 'react-icons/ri';
-
+import { ImBlog } from 'react-icons/im';
 import { isAuthenticated } from '../../actions/auth';
 import { Divider, List, ListItem, ListItemText } from '@material-ui/core';
 import Link from 'next/link';
@@ -18,6 +18,8 @@ const useStyles = makeStyles((theme) => ({
 		background: 'whiteSmoke',
 	},
 	paper: {
+		marginLeft: '40px',
+		marginRight: '40px',
 		padding: theme.spacing(1.5),
 		textAlign: 'center',
 		display: 'flex',
@@ -55,7 +57,7 @@ const AdminIndex = () => {
 		<Layout>
 			<Admin>
 				<div className={classes.root}>
-					<Grid container spacing={3}>
+					<Grid container spacing={4} justify="center">
 						<Grid item xs={12}>
 							{isAuthenticated() ? (
 								<Paper
@@ -95,6 +97,21 @@ const AdminIndex = () => {
 									<ListItem>
 										<Link href="/admin/crud/category-tag">
 											<ListItemText primary="Create Tags" />
+										</Link>
+									</ListItem>
+								</List>
+								<Divider />
+							</Paper>
+						</Grid>
+						<Grid item md={12} sm={6}>
+							<Paper className={classes.paper} style={{ color: '#2f3bc2', cursor: 'not-allowed' }}>
+								<ImBlog /> &nbsp; Blog
+							</Paper>
+							<Paper style={{ marginTop: 5 }} className={classes.createPaper}>
+								<List component="nav">
+									<ListItem>
+										<Link href="/admin/crud/blog">
+											<ListItemText primary="Create Blogs" />
 										</Link>
 									</ListItem>
 								</List>
