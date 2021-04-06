@@ -3,5 +3,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/admin": "pages/admin.js",
-  "/": "pages/index.js"
+  "/admin/crud/blog": "pages/admin/crud/blog.js"
 }
