@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
 		background: 'whiteSmoke',
 	},
 	paper: {
-		marginLeft: '40px',
-		marginRight: '40px',
+		marginLeft: '80px',
+		marginRight: '80px',
 		padding: theme.spacing(1.5),
 		textAlign: 'center',
 		display: 'flex',
@@ -41,6 +41,8 @@ const useStyles = makeStyles((theme) => ({
 	createPaper: {
 		textAlign: 'center',
 		cursor: 'pointer',
+		marginLeft: '80px',
+		marginRight: '80px',
 		display: 'flex',
 		'&:hover': {
 			background: '#ebebeb',
