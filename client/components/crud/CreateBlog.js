@@ -78,6 +78,31 @@ const CreateBlog = ({ router }) => {
 			localStorage.setItem('blog', JSON.stringify(e));
 		}
 	};
+
+	const displayCategories = () => {
+		return (
+			categories &&
+			categories.map((item, index) => (
+				<li key={index} className="list-unstyled">
+					<input type="checkbox" className="mr-2" />
+					<label className="form-check-label">{item.name}</label>
+				</li>
+			))
+		);
+	};
+
+	const displayTags = () => {
+		return (
+			tags &&
+			tags.map((item, index) => (
+				<li key={index} className="list-unstyled">
+					<input type="checkbox" className="mr-2" />
+					<label className="form-check-label">{item.name}</label>
+				</li>
+			))
+		);
+	};
+
 	const createBlogForm = () => {
 		return (
 			<form onSubmit={publishBlog}>
@@ -110,7 +135,10 @@ const CreateBlog = ({ router }) => {
 					<div className="col-md-4">
 						<h6>Categories</h6>
 						<hr />
+						{displayCategories()}
 						<h6>Tags</h6>
+						<hr />
+						{displayTags()}
 					</div>
 				</div>
 			</div>
