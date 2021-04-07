@@ -21,6 +21,10 @@ const CreateBlog = ({ router }) => {
 			return false;
 		}
 	};
+
+	const [categories, setCategories] = useState([]);
+	const [tags, setTags] = useState([]);
+
 	const [body, setBody] = useState(fetchFromLocalStorage());
 	const [values, setValues] = useState({
 		error: '',
@@ -33,7 +37,29 @@ const CreateBlog = ({ router }) => {
 	const { error, sizeError, success, formData, title, hidePublishButton } = values;
 	useEffect(() => {
 		setValues({ ...values, formData: new FormData() });
+		initialCategories();
+		initialTags();
 	}, [router]);
+
+	const initialCategories = () => {
+		getCategories().then((data) => {
+			if (data.error) {
+				setValues({ ...values, error: data.error });
+			} else {
+				setCategories(data);
+			}
+		});
+	};
+
+	const initialTags = () => {
+		getTags().then((data) => {
+			if (data.error) {
+				setValues({ ...values, error: data.error });
+			} else {
+				setTags(data);
+			}
+		});
+	};
 
 	const publishBlog = (e) => {
 		e.preventDefault();
@@ -78,8 +104,16 @@ const CreateBlog = ({ router }) => {
 	};
 	return (
 		<div>
-			{createBlogForm()}
-			<hr />
+			<div className="container-fluid">
+				<div className="row">
+					<div className="col-md-8">{createBlogForm()}</div>
+					<div className="col-md-4">
+						<h6>Categories</h6>
+						<hr />
+						<h6>Tags</h6>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };
