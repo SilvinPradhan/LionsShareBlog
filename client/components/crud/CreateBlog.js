@@ -24,6 +24,10 @@ const CreateBlog = ({ router }) => {
 
 	const [categories, setCategories] = useState([]);
 	const [tags, setTags] = useState([]);
+	// For categories
+	const [checkedC, setCheckedC] = useState([]);
+	// For tags
+	const [checkedT, setCheckedT] = useState([]);
 
 	const [body, setBody] = useState(fetchFromLocalStorage());
 	const [values, setValues] = useState({
@@ -41,7 +45,7 @@ const CreateBlog = ({ router }) => {
 		initialTags();
 	}, [router]);
 
-	const initialCategories = () => {
+	function initialCategories() {
 		getCategories().then((data) => {
 			if (data.error) {
 				setValues({ ...values, error: data.error });
@@ -49,9 +53,9 @@ const CreateBlog = ({ router }) => {
 				setCategories(data);
 			}
 		});
-	};
+	}
 
-	const initialTags = () => {
+	function initialTags() {
 		getTags().then((data) => {
 			if (data.error) {
 				setValues({ ...values, error: data.error });
@@ -59,7 +63,7 @@ const CreateBlog = ({ router }) => {
 				setTags(data);
 			}
 		});
-	};
+	}
 
 	const publishBlog = (e) => {
 		e.preventDefault();
@@ -79,12 +83,27 @@ const CreateBlog = ({ router }) => {
 		}
 	};
 
+	const handleToggle = (item) => () => {
+		setValues({ ...values, error: '' });
+		// return the first index or -1
+		const clickedCategory = checkedC.indexOf(item);
+		const all = [...checkedC];
+		if (clickedCategory === -1) {
+			all.push(item);
+		} else {
+			all.splice(clickedCategory, 1);
+		}
+		console.log(all);
+		setCheckedC(all);
+		formData.set('categories', all);
+	};
+
 	const displayCategories = () => {
 		return (
 			categories &&
 			categories.map((item, index) => (
 				<li key={index} className="list-unstyled">
-					<input type="checkbox" className="mr-2" />
+					<input onChange={handleToggle(item._id)} type="checkbox" className="mr-2" />
 					<label className="form-check-label">{item.name}</label>
 				</li>
 			))
@@ -133,12 +152,34 @@ const CreateBlog = ({ router }) => {
 				<div className="row">
 					<div className="col-md-8">{createBlogForm()}</div>
 					<div className="col-md-4">
-						<h6>Categories</h6>
-						<hr />
-						{displayCategories()}
-						<h6>Tags</h6>
-						<hr />
-						{displayTags()}
+						<div>
+							<h6>Categories</h6>
+							<hr />
+							<ul
+								style={{
+									maxHeight: '100px',
+									overflow: 'scroll',
+									overflowY: 'hidden',
+									overflowX: 'hidden',
+								}}
+							>
+								{displayCategories()}
+							</ul>
+						</div>
+						<div>
+							<h6>Tags</h6>
+							<hr />
+							<ul
+								style={{
+									maxHeight: '100px',
+									overflow: 'scroll',
+									overflowY: 'hidden',
+									overflowX: 'hidden',
+								}}
+							>
+								{displayTags()}
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
