@@ -61,7 +61,7 @@ const CategoryTag = (props) => {
 					</Card>
 				</Row>
 				<div className="row">
-					<div className="col-md-8">
+					<div className="col-md-12">
 						<CreateBlog />
 					</div>
 				</div>
