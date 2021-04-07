@@ -60,15 +60,11 @@ const CategoryTag = (props) => {
 						</CardContent>
 					</Card>
 				</Row>
-				<Row className={classes.row}>
-					<Col sm="5">
-						<Card body>
-							<CardContent>
-								<CreateBlog />
-							</CardContent>
-						</Card>
-					</Col>
-				</Row>
+				<div className="row">
+					<div className="col-md-8">
+						<CreateBlog />
+					</div>
+				</div>
 			</Admin>
 		</Layout>
 	);
