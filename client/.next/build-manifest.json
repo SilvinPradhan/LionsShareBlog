@@ -28,11 +28,6 @@
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/admin/crud/blog.js"
-    ],
-    "/admin/crud/category-tag": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/chunks/pages/admin/crud/category-tag.js"
     ]
   },
   "ampFirstPages": []

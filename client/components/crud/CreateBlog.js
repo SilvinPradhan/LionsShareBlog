@@ -98,6 +98,21 @@ const CreateBlog = ({ router }) => {
 		formData.set('categories', all);
 	};
 
+	const handleToggleTag = (item) => () => {
+		setValues({ ...values, error: '' });
+		// return the first index or -1
+		const clickedTag = checkedT.indexOf(item);
+		const all = [...checkedT];
+		if (clickedTag === -1) {
+			all.push(item);
+		} else {
+			all.splice(clickedTag, 1);
+		}
+		console.log(all);
+		setCheckedT(all);
+		formData.set('tags', all);
+	};
+
 	const displayCategories = () => {
 		return (
 			categories &&
@@ -115,7 +130,7 @@ const CreateBlog = ({ router }) => {
 			tags &&
 			tags.map((item, index) => (
 				<li key={index} className="list-unstyled">
-					<input type="checkbox" className="mr-2" />
+					<input onChange={handleToggleTag(item._id)} type="checkbox" className="mr-2" />
 					<label className="form-check-label">{item.name}</label>
 				</li>
 			))
