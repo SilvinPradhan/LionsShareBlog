@@ -9,6 +9,7 @@ import { getTags } from '../../actions/tag';
 import { createBlog } from '../../actions/blog';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import '../../node_modules/react-quill/dist/quill.snow.css';
+import { Jumbotron, Button } from 'reactstrap';
 
 const CreateBlog = ({ router }) => {
 	const fetchFromLocalStorage = () => {
@@ -166,35 +167,38 @@ const CreateBlog = ({ router }) => {
 			<div className="container-fluid">
 				<div className="row">
 					<div className="col-md-8">{createBlogForm()}</div>
+
 					<div className="col-md-4">
-						<div>
-							<h6>Categories</h6>
-							<hr />
-							<ul
-								style={{
-									maxHeight: '100px',
-									overflow: 'scroll',
-									overflowY: 'hidden',
-									overflowX: 'hidden',
-								}}
-							>
-								{displayCategories()}
-							</ul>
-						</div>
-						<div>
-							<h6>Tags</h6>
-							<hr />
-							<ul
-								style={{
-									maxHeight: '100px',
-									overflow: 'scroll',
-									overflowY: 'hidden',
-									overflowX: 'hidden',
-								}}
-							>
-								{displayTags()}
-							</ul>
-						</div>
+						<Jumbotron>
+							<div>
+								<h6>Categories</h6>
+								<hr />
+								<ul
+									style={{
+										maxHeight: '100px',
+										overflow: 'scroll',
+										overflowY: 'hidden',
+										overflowX: 'hidden',
+									}}
+								>
+									{displayCategories()}
+								</ul>
+							</div>
+							<div>
+								<h6>Tags</h6>
+								<hr />
+								<ul
+									style={{
+										maxHeight: '100px',
+										overflow: 'scroll',
+										overflowY: 'hidden',
+										overflowX: 'hidden',
+									}}
+								>
+									{displayTags()}
+								</ul>
+							</div>
+						</Jumbotron>
 					</div>
 				</div>
 			</div>
