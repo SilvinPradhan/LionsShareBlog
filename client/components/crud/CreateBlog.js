@@ -164,11 +164,21 @@ const CreateBlog = ({ router }) => {
 	};
 	return (
 		<div>
-			<div className="container-fluid">
+			<div className="container">
 				<div className="row">
 					<div className="col-md-8">{createBlogForm()}</div>
-
 					<div className="col-md-4">
+						<div>
+							<div className="form-group pb-2">
+								<h5>Featured Image</h5>
+								<hr />
+								<small className="text-muted">Max Size: 1 MB</small>
+								<label className="btn btn-info">
+									Upload Featured Image
+									<input onChange={handleChange('photo')} type="file" accept="image/*" hidden></input>
+								</label>
+							</div>
+						</div>
 						<Jumbotron>
 							<div>
 								<h6>Categories</h6>
