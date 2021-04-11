@@ -1,3 +1,7 @@
 #nprogress .bar {
 	height: 4.5px !important;
 }
+
+.ql-editor {
+	min-height: 350px;
+}

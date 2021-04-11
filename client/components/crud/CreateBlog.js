@@ -73,7 +73,7 @@ const CreateBlog = ({ router }) => {
 			if (data.error) {
 				setValues({ ...values, error: data.error });
 			} else {
-				setValues({ ...values, title: '', success: `"${data.title} has been created."` });
+				setValues({ ...values, title: '', success: `"${data.title} has been created."`, error: '' });
 				setBody('');
 				setCategories([]);
 				setTags([]);
@@ -148,6 +148,19 @@ const CreateBlog = ({ router }) => {
 		);
 	};
 
+	const displayError = () => {
+		<div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
+			{error}
+			{console.log(error)}
+		</div>;
+	};
+
+	const displaySuccess = () => {
+		<div className="alert alert-success" style={{ display: success ? '' : 'none' }}>
+			{success}
+		</div>;
+	};
+
 	const createBlogForm = () => {
 		return (
 			<form onSubmit={publishBlog}>
@@ -174,9 +187,15 @@ const CreateBlog = ({ router }) => {
 	};
 	return (
 		<div>
-			<div className="container">
+			<div className="container-fluid pb-5">
 				<div className="row">
-					<div className="col-md-8">{createBlogForm()}</div>
+					<div className="col-md-8">
+						{createBlogForm()}
+						<div className="pt-3">
+							{displayError()}
+							{displaySuccess()}
+						</div>
+					</div>
 					<div className="col-md-4">
 						<div>
 							<div className="form-group pb-2">
