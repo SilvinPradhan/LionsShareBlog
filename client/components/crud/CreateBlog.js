@@ -211,7 +211,7 @@ const CreateBlog = ({ router }) => {
 						</div>
 						<Jumbotron>
 							<div>
-								<h6>Categories</h6>
+								<h5 style={{ fontWeight: 'bold' }}>Categories</h5>
 								<hr />
 								<ul
 									style={{
@@ -225,7 +225,7 @@ const CreateBlog = ({ router }) => {
 								</ul>
 							</div>
 							<div>
-								<h6>Tags</h6>
+								<h5 style={{ fontWeight: 'bold' }}>Tags</h5>
 								<hr />
 								<ul
 									style={{
