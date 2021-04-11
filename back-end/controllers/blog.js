@@ -109,7 +109,50 @@ exports.list = (req, res) => {
 		});
 };
 
-exports.listBlogCategoriesAndTags = (req, res) => {};
+exports.listBlogCategoriesAndTags = (req, res) => {
+	let limit = req.body.limit ? parseInt(req.body.limit) : 10;
+	let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+
+	let categories;
+	let tags;
+	let blogs;
+	Blog.find({})
+		.populate('categories', '_id name slug')
+		.populate('tags', '_id name slug')
+		.populate('postedBy', '_id name username profile')
+		.sort({ createdAt: -1 })
+		.skip(skip)
+		.limit(limit)
+		.select('_id title slug excerpt categories tags postedBy createdAt updatedAt')
+		.exec((err, data) => {
+			if (err) {
+				return res.json({
+					error: errorHandler(err),
+				});
+			}
+			blogs = data;
+			// Get all categories
+			Category.find({}).exec((err, item) => {
+				if (err) {
+					return res.json({
+						error: errorHandler(err),
+					});
+				}
+				categories = item;
+				// Get all tags now
+				Tag.find({}).exec((err, item) => {
+					if (err) {
+						return res.json({
+							error: errorHandler(err),
+						});
+					}
+					tags = item;
+					// return all of them
+					res.json({ blogs, categories, tags, size: blogs.length });
+				});
+			});
+		});
+};
 
 exports.read = (req, res) => {};
 exports.removeBlog = (req, res) => {};
