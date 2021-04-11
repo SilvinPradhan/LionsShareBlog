@@ -4,13 +4,13 @@ import Admin from '../../../components/auth/Admin';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import CreateBlog from '../../../components/crud/CreateBlog';
-import { Col, Row } from 'reactstrap';
+import { Row } from 'reactstrap';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		marginTop: '10px',
-		margin: 'auto',
+		marginTop: '0',
 		maxWidth: 350,
+		margin: 'auto',
 		background: 'white',
 	},
 	row: {
@@ -53,16 +53,18 @@ const CategoryTag = (props) => {
 	return (
 		<Layout>
 			<Admin>
-				<Row className={classes.root}>
-					<Card>
-						<CardContent>
-							<Typography className={classes.title}>Create a New Blog</Typography>
-						</CardContent>
-					</Card>
-				</Row>
-				<div className="row">
-					<div className="col-md-12">
-						<CreateBlog />
+				<div className="container-fluid">
+					<Row className={classes.root}>
+						<Card>
+							<CardContent>
+								<Typography className={classes.title}>Create a New Blog</Typography>
+							</CardContent>
+						</Card>
+					</Row>
+					<div className="row">
+						<div className="col-md-12">
+							<CreateBlog />
+						</div>
 					</div>
 				</div>
 			</Admin>

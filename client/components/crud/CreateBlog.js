@@ -40,6 +40,7 @@ const CreateBlog = ({ router }) => {
 		hidePublishButton: false,
 	});
 	const { error, sizeError, success, formData, title, hidePublishButton } = values;
+	const token = getCookie('token');
 	useEffect(() => {
 		setValues({ ...values, formData: new FormData() });
 		initialCategories();
@@ -68,7 +69,16 @@ const CreateBlog = ({ router }) => {
 
 	const publishBlog = (e) => {
 		e.preventDefault();
-		console.log('published');
+		createBlog(formData, token).then((data) => {
+			if (data.error) {
+				setValues({ ...values, error: data.error });
+			} else {
+				setValues({ ...values, title: '', success: `"${data.title} has been created."` });
+				setBody('');
+				setCategories([]);
+				setTags([]);
+			}
+		});
 	};
 	const handleChange = (name) => (e) => {
 		const value = name === 'photo' ? e.target.files[0] : e.target.value;
@@ -170,8 +180,9 @@ const CreateBlog = ({ router }) => {
 					<div className="col-md-4">
 						<div>
 							<div className="form-group pb-2">
-								<h5>Featured Image</h5>
+								<h5>Select Featured Image</h5>
 								<hr />
+
 								<small className="text-muted">Max Size: 1 MB</small>
 								<label className="btn btn-info">
 									Upload Featured Image
