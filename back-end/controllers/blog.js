@@ -132,21 +132,21 @@ exports.listBlogCategoriesAndTags = (req, res) => {
 			}
 			blogs = data;
 			// Get all categories
-			Category.find({}).exec((err, item) => {
+			Category.find({}).exec((err, c) => {
 				if (err) {
 					return res.json({
 						error: errorHandler(err),
 					});
 				}
-				categories = item;
+				categories = c;
 				// Get all tags now
-				Tag.find({}).exec((err, item) => {
+				Tag.find({}).exec((err, t) => {
 					if (err) {
 						return res.json({
 							error: errorHandler(err),
 						});
 					}
-					tags = item;
+					tags = t;
 					// return all of them
 					res.json({ blogs, categories, tags, size: blogs.length });
 				});
@@ -154,7 +154,7 @@ exports.listBlogCategoriesAndTags = (req, res) => {
 		});
 };
 
-exports.read = (req, res) => {
+exports.listOne = (req, res) => {
 	const slug = req.params.slug.toLowerCase();
 	Blog.findOne({ slug })
 		.populate('categories', '_id name slug')
@@ -170,17 +170,18 @@ exports.read = (req, res) => {
 			res.json(data);
 		});
 };
-exports.removeBlog = (req, res) => {
-	const slug = req.params.slug.toLowerCase();
-	Blog.findOneAndRemove({ slug }).exec((err, data) => {
+exports.remove = (req, res) => {
+	const slug = req.params.slug;
+	Blog.findOneAndDelete({ slug }).exec((err, data) => {
 		if (err) {
 			return res.json({
 				error: errorHandler(err),
 			});
 		}
 		res.json({
-			message: 'Blog deleted successfully!',
+			message: 'Blog deleted successfully',
 		});
 	});
 };
+
 exports.update = (req, res) => {};
