@@ -73,3 +73,9 @@
 	background-color: #503aa1;
 	color: #ffffff;
 }
+
+@media (max-width: 768px) {
+	.sideBar {
+		float: right;
+	}
+}

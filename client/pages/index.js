@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import Link from 'next/link';
-import ProfileFind from '../components/profileFind/ProfileFind';
+import ProfileFind from '../pages/user/profileFind/ProfileFind';
 
 const Index = () => {
 	return (
