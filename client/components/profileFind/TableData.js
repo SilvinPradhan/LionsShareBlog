@@ -24,8 +24,6 @@ const TableData = ({ data, repo }) => {
 							<CustomTableCell>Name</CustomTableCell>
 							<CustomTableCell align="right">Avatar</CustomTableCell>
 							<CustomTableCell align="right">Bio</CustomTableCell>
-							<CustomTableCell align="right">Public Repos</CustomTableCell>
-							<CustomTableCell align="right">Following</CustomTableCell>
 							<CustomTableCell align="right">Followers</CustomTableCell>
 						</TableRow>
 					</TableHead>
@@ -54,8 +52,6 @@ const TableData = ({ data, repo }) => {
 								)}
 							</TableCell>
 							<TableCell>{data.bio}</TableCell>
-							<TableCell>{data.public_repos}</TableCell>
-							<TableCell>{data.following}</TableCell>
 							<TableCell>{data.followers}</TableCell>
 						</TableRow>
 					</TableBody>

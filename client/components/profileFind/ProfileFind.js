@@ -28,7 +28,7 @@ const ProfileFind = () => {
 	};
 
 	return (
-		<div style={{ padding: 25 }}>
+		<div style={{ padding: 10, width: '500px', float: 'right' }}>
 			<div
 				className="searchBar"
 				style={{
