@@ -148,18 +148,19 @@ const CreateBlog = ({ router }) => {
 		);
 	};
 
-	const displayError = () => {
-		<div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
-			{error}
-			{console.log(error)}
-		</div>;
-	};
+	// const displayError = () => {
+	// 	<div className="alert alert-danger" style={{ display: error ? '' : 'none' }}>
+	// 		{error}
+	// 		{console.log(error)}
+	// 	</div>;
+	// };
 
-	const displaySuccess = () => {
-		<div className="alert alert-success" style={{ display: success ? '' : 'none' }}>
-			{success}
-		</div>;
-	};
+	// const displaySuccess = () => {
+	// 	<div className="alert alert-success" style={{ display: success ? '' : 'none' }}>
+	// 		{success}
+	// 		{console.log(success)}
+	// 	</div>;
+	// };
 
 	const createBlogForm = () => {
 		return (
@@ -191,10 +192,7 @@ const CreateBlog = ({ router }) => {
 				<div className="row">
 					<div className="col-md-8">
 						{createBlogForm()}
-						<div className="pt-3">
-							{displayError()}
-							{displaySuccess()}
-						</div>
+						<div className="pt-3">{error ? <div>{error}</div> : ''}</div>
 					</div>
 					<div className="col-md-4">
 						<div>
@@ -205,7 +203,13 @@ const CreateBlog = ({ router }) => {
 								<small className="text-muted">Max Size: 1 MB</small>
 								<label className="btn btn-info">
 									Upload Featured Image
-									<input onChange={handleChange('photo')} type="file" accept="image/*" hidden></input>
+									<input
+										onChange={handleChange('photo')}
+										type="file"
+										accept="image/*"
+										hidden
+										required
+									></input>
 								</label>
 							</div>
 						</div>
