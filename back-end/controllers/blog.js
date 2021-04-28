@@ -41,12 +41,6 @@ exports.create = (req, res) => {
 			});
 		}
 
-		if (!photo) {
-			return res.status(400).json({
-				error: 'Photo Required',
-			});
-		}
-
 		let blog = new Blog();
 		blog.title = title;
 		blog.body = body;
